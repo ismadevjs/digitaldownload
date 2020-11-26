@@ -1,0 +1,212 @@
+<%-include('partials/header')%>
+        
+        <!-- MAIN -->
+        <main class="single-item">
+            <div class="container">
+                <section class="text-block mb-70">
+                    <h4 class="text-center"><%=product.ProductName%></h4>
+                    <p class="text-center"><%=product.ProductSdesc%> </p>
+                </section>
+                <section class="btns-group-demo mb-70">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <a href="<%=product.ProductDemo%>" class="btn btn-small btn-gray pull-right">Live Demo</a>
+                        </div>
+                        <form action="/pay/<%=product._id%>" method="POST">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <button type="submit" class="btn btn-small pull-right"><span class="text-white">Purchase $<%=product.ProductPrice%></span></button>
+                        </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <section class="slider mb-60">
+                <% for(s=1;s<product.zipProduct.screenshots.length;s++) { %>
+                    <div>
+                        <img src="/<%=product.zipProduct.screenshots[s].filename%>" alt="">
+                    </div>
+                <% } %>  
+            </section>
+            <div class="container">
+                <h4 class="text-center mb-60">Theme Features</h4>
+                <section class="features mb-30 row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="features-info">
+                            <h6 class="border-decor">Info</h6>
+                            <table class="table">
+                                <tr>
+                                    <td>Created</td>
+                                    <td><%=product.Created_at.substr(0,8)%></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Upadted</td>
+                                    <td><%=product.Updated_at.substr(0,8)%></td>
+                                </tr>
+                                <tr>
+                                    <td>Software Version</td>
+                                    <td><%=product.ProductVersion%></td>
+                                </tr>
+                                <tr>
+                                    <td>Files Included</td>
+                                    <td>
+                                        <div class="tags">
+                                          <%  for(ci=0;ci<product.selectFilesIncluded.length;ci++) { %>
+                                            <a href="#"><%= product.selectFilesIncluded[ci]%></a>
+                                         <% } %>
+                                           
+                                           
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-8 col-sm-8">
+                           <p><%= product.textProductarea.replace(/(<[^>]+>|<[^>]>|<\/[^>]>)/g, "") %></p> 
+                    </div>
+                </section>
+                <h4 class="text-center">Reviews</h4>
+              
+                <!-- hna ni habass-->
+                    <section class="login-form text-center">
+                        <form action="/product/<%=product._id%>/reviews" method="post" class="mb-40">
+                            <div class="reviews-info text-center">
+            
+                            <!-- ratings-->
+                            <div class="stars stars-example-fontawesome">
+                                <select id="example-fontawesome" name="rating" autocomplete="off">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                </select>
+                                <span class="title">Font Awesome</span>
+                            </div>
+                          
+                            </div>
+                            <input type="text" name="reviews" class="form-control" placeholder="leave a review" required>
+                            <textarea class="form-control" name="reviewDescription" cols="30" rows="10" required></textarea>
+                            <input type="submit" class="btn btn-small" value="Submit Your Review">
+                        </form>
+                    </section>
+              
+                <section class="row mb-40">
+                <%=console.log(userNow)%>
+                   <% for(rev=0;rev<reviews.length;rev++) {  %>
+                    <div class="col-md-4">
+                        <a href="#" class="comment">
+                            <div class="image">
+                                <img src="<%if(!reviews[rev].author.image) { %>
+                                    /images/defaultUser.png
+                                <% } else { %>
+                                    <%= reviews[rev].author.image %>
+                                <% }%> " alt="">
+                            </div>
+                            <p><%=reviews[rev].reviewDescription %></p>
+
+                    
+                            <div class="caption">
+                                     
+                                    
+                                        <p>
+                                            <%=reviews[rev].author %>
+                                        </p>
+                                        <div class="reviews-info text-center mb-60">
+                                         
+                                                <span class="stars">
+                                                <% if(reviews[rev].rating == 1) { %>
+                                                    <i class="fa fa-star active" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                   <% } else if(reviews[rev].rating == 2) { %>
+                                                    <i class="fa fa-star active" aria-hidden="true"></i>
+                                                    <i class="fa fa-star active" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <% } else if(reviews[rev].rating == 3) { %>
+                                                    <i class="fa fa-star active" aria-hidden="true"></i>
+                                                    <i class="fa fa-star active" aria-hidden="true"></i>
+                                                    <i class="fa fa-star active" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                     <% } else if(reviews[rev].rating == 4) { %>
+                                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                     <% } else if(reviews[rev].rating == 5) { %>
+                                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                                            <% } else { %>
+                                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                                <i class="fa fa-star" aria-hidden="true"></i>
+                                                            <% } %>
+
+                                                </span>
+                                                
+                                        </div>
+                                    
+                            </div>
+                        </a>
+                    </div>
+                    <% } %>
+
+ 
+                </section>
+                <section class="row">
+                    <%  services.forEach(function(service) { %>
+
+                     
+                    <div class="col-md-6">
+                        <div class="block-icon">
+                            <img src="/<%=service.imageService.filename%>" alt="">
+                            <div class="text-block">
+                                <h4 class="text-center border-decor"><%=service.ServiceName%></h4>
+                                <p class="text-center"><%=service.textProductarea%></p>
+                            </div>
+                            <a href="#" class="btn btn-small btn-center">Support Centre</a>
+                        </div>
+                    </div>
+
+                    <% }) %>
+                </section>
+                <h4 class="mt-30 mb-30 text-center">Items for you</h4>
+                <section class="preview row mb-70">
+                    <!-- Create a random generating items -->
+                    <!-- task of 03-01-2020 stopped here -->
+
+                   
+                       
+                    <% for( k=0; k < products.length ; k++ ) {%>  
+
+                    <div class="col-md-4 col-sm-6 col-xs-6">
+                        <a href="#"><img src="/<%=products[k].zipProduct.cover[0].filename%>" alt="">
+                            <span class="name"><%= products[k].ProductName %></span>
+                        </a>
+                    </div>
+
+
+                    <% } %>
+
+                       
+
+               
+                 
+     
+                </section>
+            </div>
+        </main>
+        <!-- FOOTER -->
+     <%-include('partials/footer')%>

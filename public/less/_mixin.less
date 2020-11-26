@@ -1,0 +1,74 @@
+//mixin
+.cross_transition(@val) {
+	-webkit-transition: @val;
+	-moz-transition: @val;
+	-ms-transition: @val;
+	-o-transition: @val;
+	transition: @val;
+}
+
+.cross_transform(@val1) {
+	-webkit-transform: @val1;
+	-moz-transform: @val1;
+	-ms-transform: @val1;
+	-o-transform: @val1;
+	transform: @val1;
+}
+
+.cross_transform_origin(@x, @y) {
+	-webkit-transform-origin: @x @y;
+    -moz-transform-origin: @x @y;
+    -o-transform-origin: @x @y;
+    -ms-transform-origin: @x @y;
+    transform-origin: @x @y;
+}
+
+.cross_rotate(@val) {
+	-webkit-transform: rotate(@val);
+	-moz-transform: rotate(@val);
+	-ms-transform: rotate(@val);
+	-o-transform: rotate(@val);
+	transform: rotate(@val);
+}
+
+.cross_scale(@val) {
+	-webkit-transform: scale(@val);
+	-moz-transform: scale(@val);
+	-ms-transform: scale(@val);
+	-o-transform: scale(@val);
+	transform: scale(@val);
+}
+
+.cross_border_rad(@val) {
+	-webkit-border-radius: @val;
+	-moz-border-radius: @val;
+	-ms-border-radius: @val;
+	-o-border-radius: @val;
+	border-radius: @val;
+}
+
+.cross_box_shadow(@x, @y, @degrad, @extens, @color) {
+	-webkit-box-shadow: @arguments;
+	-moz-box-shadow: @arguments;
+	-ms-box-shadow: @arguments;
+	-o-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
+.cross_opacity(@val) {
+	-moz-opacity:@val;
+	-khtml-opacity:@val;
+	opacity:@val;
+}
+
+.reset_list_style {
+	list-style: none;
+	padding: 0;
+}
+
+.backface_vis_hid() {
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-ms-backface-visibility: hidden;
+	backface-visibility: hidden;
+};

@@ -1,0 +1,47 @@
+<%- include('partials/header')%>
+ 
+<main class="about-us">
+    <div class="container">
+        <section class="text-block mb-70">
+            <h4 class="text-center"><%=pageId.pageTitle%></h4>
+            <p class="text-center"><%=pageId.textAreaForPages%> </p>
+        </section>
+        <section class="mb-60 image-scale scale-sm">
+            <img src="images/eiefy_0004_About-1.png" alt="">
+        </section>
+        <section class="text-block text-center mb-60">
+            <p><%=pageId.pageBody.replace(/(<[^>]+>|<[^>]>|<\/[^>]>)/g, "")%></p>
+        <% if(pageId.pageTitle == "About" || pageId.pageTitle == "About us") { %>
+            <!-- TODO hna nloopiw bac hnjibou teamWorker -->
+            <% members.forEach(function(member) { %>
+
+          
+            <div class="border-decor bd-center bd-130"></div>
+            <section class="team-info row mb-30">
+            <div class="col-md-3 col-sm-6 col-xs-6">
+                <div class="tm-block border-decor-parent">
+                    <img class="rounded" height="64" src="/<%=member.memberAvatar.filename%>" alt="">
+                    <div class="txt">
+                        <div class="border-decor clearfix"></div>
+                        <p><%=member.memberName%></p>
+                        <span><%=member.memberWork%></span>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        <% }%>
+
+       
+           
+  
+    
+        </section>
+        <section class="text-block mb-60">
+            <h4 class="text-center">Join our team</h4>
+        </section>
+        <a href="#" class="btn btn-center btn-large mb-70">Send resume</a>
+    </div>
+</main>
+
+
+<%- include('partials/footer')%>

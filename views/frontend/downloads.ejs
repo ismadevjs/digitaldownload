@@ -1,0 +1,184 @@
+<%- include ('partials/header') %>
+
+        <!-- MAIN -->
+        <main class="downloads">
+            <div class="container">
+                <section class="text-block border-decor bd-130 bd-center mb-70">
+                    <h4 class="text-center">Downloads</h4>
+                </section>
+                <ul class="list-inline list-menu navigation-isotope mb-30">
+                    <% categories.forEach(function(category) { %>
+                      <li class="button" data-filter=".<%= category.categoryName %>"><a href="#"><%= category.categoryName %></a></li>
+                    <% }) %>
+            
+                </ul>
+                    <div class="border-block"></div>
+            <% if(users.length) { %>
+
+                    <% let mabghach = 0%>
+                   
+             <% users.forEach(function(user) { %>
+
+                  
+             <% user.productsFounded.forEach(function(product) { %>
+
+             
+                <section class="product-list row isotope mb-70">
+                    
+            
+                        <div class="block <%product.CategoryId.forEach(function(cat) { %>
+                            <%=cat%>
+                        <%})%>>
+                            <div class="row">
+                                <div class="col-md-3 col-sm-3 col-xs-6">
+                                    <a href=""><img src="/<%=product.zipProduct.cover[0].filename%>" alt=""></a>
+                                </div>
+                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                    <div class="features-info">
+                                        <h6 class="border-decor"><a href="/product/<%=product._id%>"><%=product.ProductName%></a></h6>
+                                        <table class="table">
+                                            <tr>
+                                                <td>Demo : </td>
+                                                <td><a href="//<%=product.ProductDemo%>"><%=product.ProductDemo%></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>License</td>
+                                                <td>Regular</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                             
+                                <div class="col-md-2 col-sm-4 col-xs-4 col-md-offset-0 col-sm-offset-1 col-xs-offset-2 pull-right text-center">
+                                    <a href="/<%=product.zipProduct.zip[0].filename%>" class="btn btn-small btn-gray btn-download">Download</a>
+                                </div>  
+                           
+                            <% if (product.hasReview.length == 1) { %>
+                                    <%mabghach1 = product.hasReview.rating%>
+                                    <span class="stars">
+                                    <% if(mabghach1 == 1 || mabghach1 <= 1.99) { %>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                       <% } else if(mabghach1 == 2 || mabghach1 <= 2.99) { %>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <% } else if(mabghach1 == 3 || mabghach1 <= 3.99) { %>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                         <% } else if(mabghach1 == 4 || mabghach1 <= 4.99) { %>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                         <% } else if(mabghach1 == 5) { %>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <% } else { %>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                <% } %>
+                    </span>
+                            <%} else { %>
+                                <% for(ibtassim = 0;ibtassim<product.hasReview.length;ibtassim++) {%>
+                                    <% mabghach = mabghach + parseInt(product.hasReview[ibtassim].rating) %>
+                                <%}%>
+            
+                                <%mabghach =  mabghach / ibtassim %>
+                                <span class="stars">
+                                    <% if(mabghach == 1 || mabghach <= 1.99) { %>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                       <% } else if(mabghach == 2 || mabghach <= 2.99) { %>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <% } else if(mabghach == 3 || mabghach <= 3.99) { %>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star active" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                         <% } else if(mabghach == 4 || mabghach <= 4.99) { %>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star active" aria-hidden="true"></i>
+                                            <i class="fa fa-star" aria-hidden="true"></i>
+                                         <% } else if(mabghach == 5) { %>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <i class="fa fa-star active" aria-hidden="true"></i>
+                                                <% } else { %>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                <% } %>
+                    </span>
+                            <% }%>
+                               
+                                    
+                                    
+                                </div>     
+                                                       
+                    </section>
+
+              
+                    <%})%>
+                    
+                <% })%>  
+              
+              <% } %>       
+
+             
+                <a href="#" class="btn btn-small btn-gray mb-70 btn-next">Next</a>
+                <section class="row mb-40">
+                    <div class="col-md-6">
+                        <div class="block-icon">
+                            <img src="fonts/eiefy_icons/support.svg" alt="">
+                            <div class="text-block">
+                                <h4 class="text-center border-decor">Customer support.</h4>
+                                <p class="text-center">Our solution experts are here to answer your questions, help you troubleshoot issues, & increase satisfaction with our solutions.</p>
+                            </div>
+                            <a href="#" class="btn btn-small btn-center">Support Centre</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="block-icon">
+                            <img src="fonts/eiefy_icons/wordpress.svg" alt="">
+                            <div class="text-block">
+                                <h4 class="text-center border-decor">Want custom WordPress Theme?</h4>
+                                <p class="text-center">Let’s face it: a theme’s price tag matters a lot. Custom designs, which in the WordPress world are usually custom themes.</p>
+                            </div>
+                            <a href="#" class="btn btn-small btn-center">Order Service</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+<%- include ('partials/footer') %>

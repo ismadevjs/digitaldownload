@@ -1,0 +1,91 @@
+<%- include ('partials/header')%>
+
+        <!-- MAIN -->
+        <main class="browse">
+            <div class="container">
+                <section class="text-block border-decor bd-130 bd-center">
+                    <h4 class="text-center"><%=founded.categoryName%></h4>
+                    <p class="text-center"><%=founded.categoryShortDescription%></p>
+                </section>
+             
+                <section class="preview row isotope">
+                   <%let ccc = 0%>
+                           <% products.forEach(function(product) { %>
+                            <% product.categoryFounded.forEach(function(category) { %>
+
+                           
+                                <% if(category.categoryName == founded.categoryName) { %>
+                                    
+                                    <div class="col-md-4 col-sm-6 col-xs-6 block <%=category.categoryName%>">
+                                        <% let image = 0%>
+                                        <%for(offf = 0 ; offf< product.zipProduct.length; offf++) { %>
+                                            <% image = product.zipProduct[1].filename%>
+                                        <% }%>
+                                        <a href="/product/<%=product._id%>"><img src="/<%=image%>" alt="">
+                                            <span class="name"><%=product.ProductName%></span>
+                                        </a>
+                                    </div>
+                                    <%ccc = ccc + 1%>
+                                <%}%>
+                                <%})%>
+                            <% }) %> 
+                          
+                        
+                            <%pagesCato = Math.ceil(ccc / 6)%>
+                              
+                         
+                    
+                </section>
+                
+                                 
+  <!-- PAGINATION -->
+   
+       <% if (currentPage == 1 && pagesCato > 1) { %> 
+        <a class="btn btn-small btn-gray btn-center btn-next"
+        href="/browse/<%=founded._id%>?page=<%= parseInt(currentPage) + 1 %>&limit=<%=limit%>%>" <span>
+          Page <%=  parseInt(currentPage) + 1 %>
+          <i class="icon ion-ios-arrow-forward"></i>
+        </span>
+        </a>
+        <% } else if (currentPage < pagesCato) { %>
+        <a class="btn btn-small btn-gray btn-center btn-next"
+        href="/browse/<%=founded._id%>?page=<%= parseInt(currentPage) - 1 %>&limit=<%=limit%>%>"><span>
+          <i class="icon ion-ios-arrow-back"></i>
+          Page <%= parseInt(currentPage) - 1 %>
+        </span>
+        </a>
+        <a class="btn btn-small btn-gray btn-center btn-next"
+        href="/browse/<%=founded._id%>?page=<%= parseInt(currentPage) + 1 %>&limit=<%=limit%>%>"><span>
+         Page <%= parseInt(currentPage) + 1 %>
+         <i class="icon ion-ios-arrow-forward"></i>
+        </span>
+        </a>
+        <% } else if (currentPage == pagesCato && pagesCato > 1) { %>
+        <a class="btn btn-small btn-gray btn-center btn-back"
+        href="/browse/<%=founded._id%>?page=<%= parseInt(currentPage) - 1 %>&limit=<%=limit%>%>"><span>
+          <i class="icon ion-ios-arrow-back"></i>Page 
+          <%=parseInt(currentPage) - 1 %>
+        </span>
+        </a>
+        <% } %>
+       
+               
+                <section class="row mb-40">
+                    <%services.forEach(function(service) {%>
+
+                    <div class="col-md-6">
+                        <div class="block-icon">
+                            <img src="/<%=service.imageService.filename%>" alt="">
+                            <div class="text-block">
+                                <h4 class="text-center border-decor"><%=service.ServiceName%></h4>
+                                <p class="text-center"><%=service.textProductarea%></p>
+                            </div>
+                            <a href="#" class="btn btn-small btn-center">Support Centre</a>
+                        </div>
+                    </div>
+                    <%})%>
+                </section>
+            </div>
+        </main>
+
+<%- include ('partials/footer')%>

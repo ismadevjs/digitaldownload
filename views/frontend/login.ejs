@@ -1,0 +1,29 @@
+<%-include('partials/header')%>
+
+        <!-- MAIN -->
+        <main class="login">
+            <div class="container">
+                <section class="text-block mb-90">
+                    <h4 class="text-center">Login to your <span class="color-theme"><%=settings.sitename%></span> account</h4>
+                    <% logginError.forEach(function(e) { %>
+                    <div class="alert alert-success text-center">
+                        <%= e %>
+                    </div>
+                    <% }) %>
+                </section>
+                <section class="image text-center mb-50">
+                    <img src="fonts/eiefy_icons/Login.svg" alt="">
+                </section>
+                <section class="login-form text-center">
+                    <form action="/login" method="post" class="mb-40">
+                        <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                        <div class="ipt-btn-block">
+                            <input type="password" name="password" class="form-control" placeholder="Password" required>
+                            <input type="submit" class="btn btn-small" value="Login">
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <%-include('partials/footer')%>

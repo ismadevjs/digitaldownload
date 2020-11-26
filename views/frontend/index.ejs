@@ -1,0 +1,142 @@
+<%- include('partials/header')%>
+
+        <!-- MAIN -->
+        <main class="home">
+            <div class="container">
+                <section class="text-block mb-70">
+                    <h4 class="text-center">
+
+                        <% logError.forEach(function(log) { %>
+                            <div class="alert alert-danger text-center" role="alert"> <%=log%> </div>
+
+                        <% })%>
+                
+                  
+                 <%= settings.heading %></h4>
+                    <p class="text-center"><%= settings.subHeading %></p>
+                </section>
+                <%let linbghi = 0%>
+                <%randCategory.forEach(function(random) {%>
+                    <% linbghi = random._id%>
+                <%})%>
+                <a href="/browse/<%=linbghi%>" class="btn btn-large btn-center mb-60">View our entire store collection <i class="arrow-right"></i></a>
+                <ul class="list-inline list-menu navigation-isotope">
+                   <% cats.forEach(function(cat) { %>
+                        <li class="button" data-filter=".<%= cat.categoryName %>"><a href="#"><%= cat.categoryName %></a></li>
+                    <%  }) %>
+                    
+                </ul>
+                <section class="preview row isotope">
+                    <style>
+                        .isdo-img
+                            {
+                                width:370px;
+                                height:456px;
+                            }
+                    </style>
+                    <% products.forEach(function(product) { %>
+
+                        <div class="col-md-4 col-sm-6 col-xs-6 block <%product.CategoryId.forEach(function(id) { %>
+                           <%= id %>
+                       <% }) %> ">
+                            <a href="/product/<%= product._id %>">
+                                <img src="/<%= product.zipProduct.cover[0].filename %>" alt="">
+                                <span class="name"><%= product.ProductName %></span>
+                            </a>
+                        </div>
+                    <% }) %>
+                    <!-- <div class="col-md-4 col-sm-6 col-xs-6 block site-template mockup">
+                        <a href="#">
+                            <img src="images/products/Bloggr.png"  alt="">
+                            <span class="name">Bloggr</span>
+                        </a>
+                    </div> -->
+                </section>
+                <section class="row mb-40">
+                    <div class="col-md-4">
+                        <a href="#" class="comment">
+                            <div class="image">
+                                <% if (testimonials.avatar == null) { %>
+                                    <img src="/images/defaultUser.png" alt=""> 
+
+                                <% } else {%>
+                                     <img src="/<%= testimonials.avatar.filename%>" alt=""> 
+                                <%}%>                            </div>
+                            <p><%=testimonials.TestimonialDescription%></p>
+                            <div class="caption">
+                                <p><%=testimonials.TestimonialName%></p>
+                                <p><%=testimonials.TestimonialWork%></p>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <a href="$" class="info">
+                            <%if(wedo.weDoAllImages.background[0] != null) { %>
+                                <img class="rounded col-sm-2 col-form-label" height="64" src="/<%=wedo.weDoAllImages.background[0].filename%>" alt="">
+                           
+
+                            <% }else{%>
+                                <img src="/images/eiefy_0038_BG_Image.png" alt="">
+                            <%} %>
+                            <div class="text">
+                                <h4 class="border-decor"><%=wedo.weDoOne%></h4>
+                                <p><%=wedo.weDoOneDescription%></p>
+                            </div>
+                        </a>
+                    </div>
+                </section>
+                <section class="row mb-40">
+                    <div class="col-md-8">
+                        <div class="block-icon">
+                            <%if(wedo.weDoAllImages.logo[0] != null) { %>
+                                <img class="rounded col-sm-2 col-form-label" height="64" src="/<%=wedo.weDoAllImages.logo[0].filename%>" alt="">
+                            <% }else { %>
+                                <img src="/fonts/eiefy_icons/support.svg" alt="">
+                            <%} %>
+                            
+                            <div class="text-block">
+                                <h4 class="text-center border-decor"><%=wedo.weDoTwo%></h4>
+                                <p class="text-center"><%=wedo.weDoTwoDescription%></p>
+                            </div>
+                         
+                                <a href="/contact" class="btn btn-small btn-center">Support Centre</a>
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                       <% if(free) { %>
+                            <div class="download">
+                                <div class="text-block">
+                                    <h4 class="border-decor"><%=free.heading%></h4>
+                                    <p><%=free.subHeading%></p>
+                                </div>
+                                <%if(free.ZipAndImage.cover[0]) { %>
+                                    <img class="rounded mr-2 mo-mb-2" alt="200x200" width="200" src="/<%=free.ZipAndImage.cover[0].filename%>" data-holder-rendered="true">                                               
+
+                                <% } else { %>
+                                    <img class="rounded mr-2 mo-mb-2" alt="200x200" width="200" src="/assets/images/product.png" data-holder-rendered="true">                                               
+
+                               <% }%> 
+                               <%if(free.ZipAndImage.zip[0]) {%>
+                                <a href="/<%=free.ZipAndImage.zip[0].filename%>" class="btn btn-small btn-dark">Download</a>
+                               <% } else { %>
+                                <a href="#" class="btn btn-small btn-dark">Download</a>
+                               <% }%>
+                            </div>
+                        <% } else { %>
+                            <div class="download">
+                                <div class="text-block">
+                                    <h4 class="border-decor">Grab this month’s free item.</h4>
+                                    <p>Download this month’s free item. Get it while you can!</p>
+                                </div>
+                                <img src="images/eiefy_0037_Free_Item.png" alt="">
+                                <a href="#" class="btn btn-small btn-dark">Download</a>
+                            </div>
+                        <% } %>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+<%- include('partials/footer')%>

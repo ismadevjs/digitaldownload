@@ -1,0 +1,200 @@
+<%- include('partials/header')%>
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="page-title-box">
+                <div class="row align-items-center">
+
+                    <div class="col-sm-6">
+                        <h4 class="page-title">Testimonial</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Sitename</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Testimonial</a></li>
+                        </ol>
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="float-right d-none d-md-block">
+                            <div class="dropdown">
+
+                              <button type="button" class="btn btn-success waves-effect waves-light" data-toggle="modal" data-target=".addCategory"><i class="mdi mdi-store mr-2"></i>Add Category</button>
+
+                                <div class="modal fade addCategory" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title mt-0"><i class="mdi mdi-store mr-2"></i>Add Category</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form  action="/admin/testimonial" method="post" enctype="multipart/form-data">
+                                                  <div class="form-group">
+                                                  <input class="form-control" type="text" name="TestimonialDescription" placeholder="add a Testimonial description" required>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    Avatar :   <input name="avatar" type="file"> <p class="badge badge-pill badge-danger">NOTE :  Avatar User Testimonial</p>
+                                                </div>
+                                                  <div class="form-group">
+                                                      <input class="form-control" type="text" name="TestimonialName" placeholder="add a Testimonial name" required>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <input class="form-control" type="text" name="TestimonialWork" placeholder="add a profession " required>
+                                                    </div>
+                                                  <button class="btn btn-success" type="submit">Add</button>
+                                                </form>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal-dialog -->
+                                </div><!-- /.modal -->
+
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="mt-0 header-title">Testimonial Management</h4>
+                            <p class="text-muted m-b-30">Add, Edit, Delete Testimonial</p>
+
+                            <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Avatar</th>
+                                    <th>Name</th>
+                                    <th>Profession</th>
+                                    <th>Update / Delete</th>
+
+                                </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    
+                                    <%for(i=0; i<testimonials.length; i++) { %>
+
+                                    
+                                        <tr>
+                                            <td>
+                                                <%=testimonials[i].TestimonialDescription%>
+                                            </td>
+                                            <td>
+                                                <% if (testimonials[i].avatar == null) { %>
+                                                    <img class="rounded-circle" height="64" src="/images/defaultUser.png" alt=""> 
+
+                                                <% } else {%>
+                                                <img class="rounded-circle" height="64" src="/<%= testimonials[i].avatar.filename%>" alt=""> 
+                                                <%}%>
+                                            </td>
+                                            <td>
+                                                <%=testimonials[i].TestimonialName%>
+                                            </td>
+                                            <td>
+                                                <%=testimonials[i].TestimonialWork%>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning waves-effect waves-light" data-toggle="modal" data-target=".<%=testimonials[i].TestimonialName.substr(0,3)%>"></i>Edit</button>
+
+                                                    <div class="modal fade <%=testimonials[i].TestimonialName.substr(0,3)%>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title mt-0"><i class="mdi mdi-store mr-2"></i>Edit Testimonial</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form  action="/admin/testimonial/<%=testimonials[i]._id%>/edit" method="post">
+                                                                    <div class="form-group">
+                                                                    <input class="form-control" type="text" name="TestimonialDescription" value="<%=testimonials[i].TestimonialDescription%>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <% if (testimonials[i].avatar == null) { %>
+                                                                            <img class="rounded-circle" height="64" src="/images/defaultUser.png" alt=""> 
+                        
+                                                                        <% } else {%>
+                                                                        <img class="rounded-circle" height="64" src="/<%= testimonials[i].avatar.filename%>" alt=""> 
+                                                                        <%}%>                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input class="form-control" type="text" name="TestimonialName" value="<%=testimonials[i].TestimonialName%>" required>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <input class="form-control" type="text" name="TestimonialWork" value="<%=testimonials[i].TestimonialWork%>" required>
+                                                                        </div>
+                                                                    <button class="btn btn-success" type="submit">Edit</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+                                                  <button type="button" class="btn btn-danger waves-effect waves-light" data-toggle="modal" data-target=".khra">Delete</button>
+
+                                                    <div class="modal fade khra" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title mt-0">Delete Category</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form  action="/admin/testimonial/<%=testimonials[i]._id%>/delete" method="post">
+                                                                      <div class="form-group">
+                                                                        <span> You sure ?</span>
+                                                                      </div>
+                                                                      <button class="btn btn-danger" type="submit" name="deleteCategory">Delete</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div><!-- /.modal-content -->
+                                                        </div><!-- /.modal-dialog -->
+                                                    </div><!-- /.modal -->
+
+                                              </td>
+                                        </tr>
+                        
+                                        <% }%>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+            
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <!-- content -->
+
+     <footer class="footer">
+        <%=settings.footer%>
+    </footer>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Right content here -->
+<!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<%- include('partials/footer')%>

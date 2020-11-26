@@ -1,0 +1,109 @@
+<%- include('partials/header')%>
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="page-title-box">
+                <div class="row align-items-center">
+                
+                    <div class="col-sm-6">
+                        <h4 class="page-title">Downloads</h4>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Sitename</a></li>
+                            <li class="breadcrumb-item"><a href="javascript:void(0);">Downloads</a></li>
+                        </ol>
+
+                    </div>
+                    
+                    <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>User Email</th>
+                                    <th>Price</th>
+                                    <th>Download</th>
+                                    <th>Product Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%let productTotal = 0%>
+                                <% users.forEach(function(user) { %>
+                                   <%user.productsFounded.forEach(function(product) {%>
+                                    
+                                <tr>
+                                    <td><%=product.ProductName%></td>
+                                    <td><%=user.email%></td>
+                                    <td><%=product.ProductPrice%></td>
+                                    <td><a class="btn btn-danger" href="/<%=product._id%>">Download</a></td>
+                                    <td><a class="btn btn-warning" href="/product/<%=product._id%>">Info Page</a></td>
+                                </tr>
+                                 <% }) %>
+                                <% }) %>
+                            </tbody>
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="col-lg-6">
+            <!-- pagination here -->
+        </div>
+            
+        <div class="col-lg-6">
+            <!-- PAGINATION -->
+<div class="shop-pagination">
+<div class="pagination">
+<% if (currentPage == 1 && pagesCato > 1) { %> 
+<a 
+href="/admin/customers?page=<%= parseInt(currentPage) + 1 %>%>" <span>
+Page <%=  parseInt(currentPage) + 1 %>
+<i class="icon ion-ios-arrow-forward"></i>
+</span>
+</a>
+<% } else if (currentPage < pagesCato) { %>
+<a 
+href="/admin/customers?page=<%= parseInt(currentPage) - 1 %>%>"><span>
+<i class="icon ion-ios-arrow-back"></i>
+Page <%= parseInt(currentPage) - 1 %>
+</span>
+</a>
+<a 
+href="/admin/customers?page=<%= parseInt(currentPage) + 1 %>%>"><span>
+Page <%= parseInt(currentPage) + 1 %>
+<i class="icon ion-ios-arrow-forward"></i>
+</span>
+</a>
+<% } else if (currentPage == pagesCato && pagesCato > 1) { %>
+<a 
+href="/admin/customers?page=<%= parseInt(currentPage) - 1 %>%>"><span>
+<i class="icon ion-ios-arrow-back"></i>Page 
+<%=parseInt(currentPage) - 1 %>
+</span>
+</a>
+<% } %>
+</div>
+    </div>
+
+</div>
+
+        </div>
+        <!-- container-fluid -->
+
+    </div>
+    <!-- content -->
+
+    <footer class="footer">
+        © 2019 Veltrix <span class="d-none d-sm-inline-block"> - Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</span>.
+    </footer>
+
+</div>
+
+<!-- ============================================================== -->
+<!-- End Right content here -->
+<!-- ============================================================== -->
+
+</div>
+<!-- END wrapper -->
+
+<%- include('partials/footer')%>
